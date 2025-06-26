@@ -58,6 +58,43 @@ void display() {
     }
 }
 
+void remove(string key) {
+    int index = hashFunction(key);
+    Node* curr = table[index];
+    Node* prev = NULL;
+
+    while (curr != NULL) {
+        if (curr->key == key) {
+            if (prev == NULL) { 
+                table[index] = curr->next;
+            } else {
+                prev->next = curr->next;
+            }
+            delete curr;
+            cout<<"Hapus " << key << " berhasil." <<endl;
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    cout<< key << " tidak ditemukan." <<endl;
+}
+
+void update(string oldKey, string newKey) {
+    int temp = 0;
+    if (search(oldKey, &temp)) {
+        if(search(newKey, &temp)){
+            cout << "Nilai sudah ada.\n";
+            return;
+        }
+        remove(oldKey);
+        insert(newKey);
+        cout <<oldKey << " di update menjadi " << newKey <<endl;
+    } else {
+        cout << oldKey << " tidak ditemukan."<<endl;
+    }
+}
+
 int main() {
     for (int i = 0; i < TABLE_SIZE; i++) {
         table[i] = NULL;
@@ -77,6 +114,11 @@ int main() {
 
     fclose(file_pointer);
 
+    update("IZUL", "Izul");
+    update("Izul", "Budi");
+    update("konz", "Budi");
+    remove("Budi");
+    remove("azril");
     cout << "Hash table:\n";
     display();
     cout << "\n------------------------------------------\n";
