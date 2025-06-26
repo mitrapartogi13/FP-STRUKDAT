@@ -29,10 +29,11 @@ void insert(int key) {
     table[index] = newNode;
 }
 
-bool search(int key) {
+bool search(int key, int *count) {
     int index = hashFunction(key);
     Node* curr = table[index];
     while (curr != NULL) {
+        (*count)++;
         if (curr->key == key) return true;
         curr = curr->next;
     }
@@ -60,44 +61,47 @@ int main() {
     FILE* file_pointer;
     int key_from_file;
 
-    file_pointer = fopen("nilai3.txt", "r");
+    file_pointer = fopen("nilai2.txt", "r");
     if (file_pointer == NULL) {
         perror("Error: Tidak dapat membuka file nilai.txt");
         return 1; 
     }
-    
-    cout << "Membaca data dari nilai.txt dan memasukkan ke hash table (C-style)...\n";
+
     while (fscanf(file_pointer, "%d", &key_from_file) == 1) {
         insert(key_from_file);
     }
 
     fclose(file_pointer);
-    cout << "Selesai memasukkan data.\n\n";
 
-
-    cout << "Hash table setelah diisi dari file:\n";
+    cout << "Hash table:\n";
     display();
     cout << "\n------------------------------------------\n";
     
+    int count = 0;
     int worst_case_key = 6;
     cout << "Worst Case: Mencari key " << worst_case_key << " (elemen di akhir chain)\n";
     auto startWorst = high_resolution_clock::now();
-    bool foundWorst = search(worst_case_key);
+    bool foundWorst = search(worst_case_key, &count);
     auto endWorst = high_resolution_clock::now();
     auto durationWorst = duration_cast<microseconds>(endWorst - startWorst);
-    cout << "Status: " << (foundWorst ? "Ditemukan" : "Tidak ada") << "\n";
-    cout << "Waktu yang dibutuhkan (Worst Case): " << durationWorst.count() << " microseconds\n\n";
 
-    int best_case_key = 999;
+    if (foundWorst) cout<<"Status: Ditemukan pada iterasi ke "<<count<<endl;
+    else cout<<"Tidak ditemukan"<<endl;
+    cout << "Waktu yang dibutuhkan: " << durationWorst.count() << " microseconds\n\n";
+
+    count = 0;
+    int best_case_key = 499;
     cout << "Best Case: Mencari key " << best_case_key << " (elemen tunggal di chain)\n";
     auto startBest = high_resolution_clock::now();
-    bool foundBest = search(best_case_key);
+    bool foundBest = search(best_case_key, &count);
     auto endBest = high_resolution_clock::now();
     auto durationBest = duration_cast<microseconds>(endBest - startBest);
-    cout << "Status: " << (foundBest ? "Ditemukan" : "Tidak ada") << "\n";
-    cout << "Waktu yang dibutuhkan (Best Case): " << durationBest.count() << " microseconds\n";
+
+    if (foundBest) cout<<"Status: Ditemukan pada iterasi ke "<<count<<endl;
+    else cout<<"Tidak ditemukan"<<endl;
+    cout << "Waktu yang dibutuhkan: " << durationBest.count() << " microseconds\n";
     
-    cout << "\n------------------------------------------\n";
+    cout << "------------------------------------------\n";
     
     return 0;
 }
