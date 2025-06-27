@@ -87,8 +87,10 @@ bool update(int oldKey, int newKey, int& iterations) {
 
     if (remove(oldKey, iterations)) {
         insert(newKey);
+        iterations += search_iters;
         return true;
     } else {
+        cout << "Gagal update: Nilai lama " << oldKey << " tidak ada.\n";
         return false;
     }
 }
@@ -161,10 +163,8 @@ int main() {
     auto durationDel = duration_cast<microseconds>(endDel - startDel);
     if (deleted) cout << "Status: Berhasil delete, memerlukan " << iterations << " iterasi." << endl;
     else cout << "Status: Gagal delete, " << val << " tidak ditemukan setelah " << iterations << " iterasi." << endl;
-    cout << "Waktu yang dibutuhkan: " << durationDel.count() << " microseconds\n\n";
-    
-    cout << "Hash table final:\n";
-    display();
+    cout << "Waktu yang dibutuhkan: " << durationDel.count() << " microseconds\n";
+
     cout << "------------------------------------------\n";
     
     return 0;

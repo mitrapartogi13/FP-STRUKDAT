@@ -91,6 +91,7 @@ bool update(const string& oldKey, const string& newKey, int& iterations) {
 
     if (remove(oldKey, iterations)) {
         insert(newKey);
+        iterations += search_iters;
         return true;
     } else {
         return false;
