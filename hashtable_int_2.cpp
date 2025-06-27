@@ -98,9 +98,9 @@ int main() {
         table[i] = NULL;
     }
 
-    FILE* file_pointer = fopen("FP-STRUKDAT/data/int500hash.txt", "r");
+    FILE* file_pointer = fopen("data/int500hash.txt", "r");
     if (file_pointer == NULL) {
-        perror("Error: Tidak dapat membuka file nilai2.txt");
+        perror("Error: Tidak dapat membuka file txt");
         return 1; 
     }
 
@@ -117,7 +117,7 @@ int main() {
     int iterations = 0;
 
     // Worst case searching (mencari elemen terakhir)
-    int worst_case_key = 58;
+    int worst_case_key = 1;
     cout << "Worst Case: Mencari key " << worst_case_key << "\n";
     auto startWorst = high_resolution_clock::now();
     bool foundWorst = search(worst_case_key, iterations);
@@ -140,7 +140,7 @@ int main() {
     cout << "Waktu yang dibutuhkan: " << durationBest.count() << " microseconds\n\n";
 
     // Update
-    int oldkey = 32, newkey = 601;
+    int oldkey = 488, newkey = 601;
     iterations = 0;
     cout << "Update key value " << oldkey << " menjadi " << newkey << endl;
     auto startUp = high_resolution_clock::now();
@@ -152,7 +152,7 @@ int main() {
     cout << "Waktu yang dibutuhkan: " << durationUp.count() << " microseconds\n\n";
 
     // Delete
-    int val = 99;
+    int val = 77;
     iterations = 0;
     cout << "Delete key value " << val << endl;
     auto startDel = high_resolution_clock::now();

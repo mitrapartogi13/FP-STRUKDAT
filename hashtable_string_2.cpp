@@ -102,7 +102,7 @@ int main() {
         table[i] = NULL;
     }
 
-    FILE* file_pointer = fopen("FP-STRUKDAT/data/string500hash.txt", "r");
+    FILE* file_pointer = fopen("data/string500hash.txt", "r");
     if (file_pointer == NULL) {
         perror("Error: Tidak dapat membuka file nilai.txt");
         return 1; 
@@ -122,8 +122,8 @@ int main() {
     
     int iterations = 0;
 
-    // Worst case searching (mencari elemen terakhir di chain terpanjang)
-    string worst_case_key = "Dedi";
+    // Worst case searching (mencari elemen terakhir)
+    string worst_case_key = "Maurice";
     cout << "Worst Case: Mencari nama \"" << worst_case_key << "\"\n";
     auto startWorst = high_resolution_clock::now();
     bool foundWorst = search(worst_case_key, iterations);
@@ -133,8 +133,8 @@ int main() {
     else cout << "Status: Tidak ditemukan setelah " << iterations << " iterasi" << endl;
     cout << "Waktu yang dibutuhkan: " << durationWorst.count() << " microseconds\n\n";
 
-    // Best case searching (mencari elemen di chain tunggal)
-    string best_case_key = "Eka";
+    // Best case searching (mencari elemen pertama)
+    string best_case_key = "Jagger";
     iterations = 0; 
     cout << "Best Case: Mencari nama \"" << best_case_key << "\"\n";
     auto startBest = high_resolution_clock::now();
@@ -146,7 +146,7 @@ int main() {
     cout << "Waktu yang dibutuhkan: " << durationBest.count() << " microseconds\n\n";
 
     // Update (misal: "Bagas" menjadi "Gagas")
-    string oldKey = "Bagas", newKey = "Gagas";
+    string oldKey = "Major", newKey = "Lesley";
     iterations = 0;
     cout << "Update nama \"" << oldKey << "\" menjadi \"" << newKey << "\"\n";
     auto startUp = high_resolution_clock::now();
@@ -158,7 +158,7 @@ int main() {
     cout << "Waktu yang dibutuhkan: " << durationUp.count() << " microseconds\n\n";
 
     // Delete
-    string val_to_delete = "Budi";
+    string val_to_delete = "Lennox";
     iterations = 0;
     cout << "Delete nama \"" << val_to_delete << "\"\n";
     auto startDel = high_resolution_clock::now();
