@@ -81,7 +81,6 @@ bool update(int oldKey, int newKey, int& iterations) {
     int search_iters = 0;
 
     if (search(newKey, search_iters)) {
-        cout << "Gagal update: Nilai baru " << newKey << " sudah ada.\n";
         return false;
     }
 
