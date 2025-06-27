@@ -85,7 +85,6 @@ bool update(const string& oldKey, const string& newKey, int& iterations) {
     int search_iters = 0;
 
     if (search(newKey, search_iters)) {
-        cout << "Gagal update: Nama baru \"" << newKey << "\" sudah ada.\n";
         return false;
     }
 
